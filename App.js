@@ -1,30 +1,14 @@
+// App.js
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, Animated, Easing, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Button, Animated, Easing, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 const WORD_HEIGHT = 60; // 각 단어의 높이 (픽셀 단위)
 
-function HomeScreen({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Pick for me</Text>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('어디가지?')}>
-        <Text style={styles.buttonText}>어디가지?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('뭐먹지?')}>
-        <Text style={styles.buttonText}>뭐먹지?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('뭐하지?')}>
-        <Text style={styles.buttonText}>뭐하지?</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
-
+// 슬롯머신 효과 컴포넌트: 옵션들이 순환되다가 최종 선택된 하나의 단어를 보여줌
 function VerticalSlotMachinePicker({ category, options }) {
-  // 옵션들을 여러 번 반복하여 순환 효과를 줍니다.
   const repetitions = 10;
   const repeatedOptions = [];
   for (let i = 0; i < repetitions; i++) {
@@ -50,11 +34,11 @@ function VerticalSlotMachinePicker({ category, options }) {
       setSelectedOption(repeatedOptions[randomIndex]);
     });
   };
-
+  
   useEffect(() => {
     pickRandom();
   }, []);
-
+  
   return (
     <View style={styles.slotWrapper}>
       <Text style={styles.categoryTitle}>{category}</Text>
@@ -74,7 +58,16 @@ function VerticalSlotMachinePicker({ category, options }) {
   );
 }
 
-// CategoryScreenWrapper: 각 카테고리 화면 상단에 배경색 없는 왼쪽 화살표 아이콘(←)을 넣습니다.
+// FooterGif 컴포넌트: 각 카테고리 화면 하단에 표시할 GIF 파일
+const FooterGif = () => {
+  return (
+    <View style={styles.footerContainer}>
+      <Image source={require('./assets/Animation - 1742568590134.gif')} style={styles.footerGif} />
+    </View>
+  );
+};
+
+// CategoryScreenWrapper: 각 카테고리 화면 상단에 왼쪽 화살표(뒤로가기)와 하단에 FooterGif 추가
 function CategoryScreenWrapper({ navigation, category, options }) {
   return (
     <View style={styles.screenContainer}>
@@ -82,10 +75,12 @@ function CategoryScreenWrapper({ navigation, category, options }) {
         <Text style={styles.backArrow}>←</Text>
       </TouchableOpacity>
       <VerticalSlotMachinePicker category={category} options={options} />
+      <FooterGif />
     </View>
   );
 }
 
+// 각 카테고리 화면
 function WhereScreen({ navigation }) {
   return (
     <CategoryScreenWrapper
@@ -116,6 +111,24 @@ function ActivityScreen({ navigation }) {
   );
 }
 
+// 홈 화면: 첫 화면에는 GIF Footer 없이 카테고리 버튼만 있음
+function HomeScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Pick for me</Text>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('어디가지?')}>
+        <Text style={styles.buttonText}>어디가지?</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('뭐먹지?')}>
+        <Text style={styles.buttonText}>뭐먹지?</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('뭐하지?')}>
+        <Text style={styles.buttonText}>뭐하지?</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -141,7 +154,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
     paddingHorizontal: 20,
-    paddingTop: 40, // 위쪽 여백
+    paddingTop: 40,
+    justifyContent: 'space-between',
   },
   title: {
     fontSize: 36,
@@ -193,5 +207,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#0F0',
     marginTop: 20,
+  },
+  footerContainer: {
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  footerGif: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
   },
 });
