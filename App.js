@@ -7,6 +7,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 const WORD_HEIGHT = 60; // 각 단어의 높이 (픽셀 단위)
 
+// FooterGif 컴포넌트: GIF 파일을 표시
+const FooterGif = () => {
+  return (
+    <View style={styles.footerContainer}>
+      <Image source={require('./assets/Animation - 1742568590134.gif')} style={styles.footerGif} />
+    </View>
+  );
+};
+
 // 슬롯머신 효과 컴포넌트: 옵션들이 순환되다가 최종 선택된 하나의 단어를 보여줌
 function VerticalSlotMachinePicker({ category, options }) {
   const repetitions = 10;
@@ -58,15 +67,6 @@ function VerticalSlotMachinePicker({ category, options }) {
   );
 }
 
-// FooterGif 컴포넌트: 각 카테고리 화면 하단에 표시할 GIF 파일
-const FooterGif = () => {
-  return (
-    <View style={styles.footerContainer}>
-      <Image source={require('./assets/Animation - 1742568590134.gif')} style={styles.footerGif} />
-    </View>
-  );
-};
-
 // CategoryScreenWrapper: 각 카테고리 화면 상단에 왼쪽 화살표(뒤로가기)와 하단에 FooterGif 추가
 function CategoryScreenWrapper({ navigation, category, options }) {
   return (
@@ -111,10 +111,12 @@ function ActivityScreen({ navigation }) {
   );
 }
 
-// 홈 화면: 첫 화면에는 GIF Footer 없이 카테고리 버튼만 있음
+// 홈 화면: 첫 화면에는 하단 GIF 없이 상단에 GIF 추가 (Pick for me 위)
 function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
+      {/* 상단에 GIF 배치 */}
+      <FooterGif />
       <Text style={styles.title}>Pick for me</Text>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('어디가지?')}>
         <Text style={styles.buttonText}>어디가지?</Text>
