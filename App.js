@@ -85,8 +85,8 @@ function WhereScreen({ navigation }) {
   return (
     <CategoryScreenWrapper
       navigation={navigation}
-      category="어디가지?"
-      options={["부산", "경주", "제주도", "일본", "서울"]}
+      category="어디가?"
+      options={["피시방", "당구장", "노래방", "볼링장", "집", "카페"]}
     />
   );
 }
@@ -95,7 +95,7 @@ function FoodScreen({ navigation }) {
   return (
     <CategoryScreenWrapper
       navigation={navigation}
-      category="뭐먹지?"
+      category="배고프다 히 히"
       options={["제육볶음", "돈까스", "스시", "국밥", "라면"]}
     />
   );
@@ -106,7 +106,7 @@ function ActivityScreen({ navigation }) {
     <CategoryScreenWrapper
       navigation={navigation}
       category="뭐하지?"
-      options={["피시방", "방탈출", "노래방", "당구장", "볼링장"]}
+      options={["집가기", "밥먹기", "잠자기", "과제하기", "게임하기",]}
     />
   );
 }
