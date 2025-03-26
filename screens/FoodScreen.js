@@ -29,7 +29,7 @@ export default function FoodScreen({ navigation }) {
       </TouchableOpacity>
       <VerticalSlotMachinePicker
         category="뭐먹지?"
-        options={["제육볶음", "돈까스", "스시", "국밥", "라면"]}
+        options={["제육볶음", "돈까스", "스시", "국밥", "라면", "김치찌개", "치킨", "마라탕", "편의점", "샌드위치", "카레", "부리또", "쌀국수", "중식"]}
       />
       <FooterGif />
     </View>

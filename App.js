@@ -18,7 +18,7 @@ export default function App() {
         <Stack.Screen name="어디가지?" component={WhereScreen} />
         <Stack.Screen name="뭐먹지?" component={FoodScreen} />
         <Stack.Screen name="뭐하지?" component={ActivityScreen} />
-        <Stack.Screen name="리뷰" component={ReviewScreen} />
+        <Stack.Screen name="리뷰해주세요 히 히" component={ReviewScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
