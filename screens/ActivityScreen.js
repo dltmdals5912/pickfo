@@ -1,17 +1,7 @@
 // screens/ActivityScreen.js
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
-const VerticalSlotMachinePicker = ({ category, options }) => {
-  return (
-    <View style={styles.slotWrapper}>
-      <Text style={styles.categoryTitle}>{category}</Text>
-      {options.map((option, index) => (
-        <Text key={index} style={styles.resultText}>{option}</Text>
-      ))}
-    </View>
-  );
-};
+import VerticalSlotMachinePicker from '../components/VerticalSlotMachinePicker';
 
 const FooterGif = () => {
   return (
@@ -29,12 +19,15 @@ export default function ActivityScreen({ navigation }) {
       </TouchableOpacity>
       <VerticalSlotMachinePicker
         category="뭐하지?"
-        options={["놀이공원", "수족관", "방탈출카페", "VR체험관", "보드게임카페"
-          , "볼링장", "실내암벽장", "피크닉", "캠핑", "해수욕장", "서핑", "카페투어", "시장투어"
-          , "자전거 타기", "등산", "루지", "짚라인", "스노클링", "낚시", "온천", "호캉스", "스키"
-          , "스노보드", "아쿠아리움", "클라이밍", "쇼핑", "영화관람", "드라이브", "맛집투어", "뮤지컬 관람"
-          , "페스티벌 방문", "박물관 관람", "전시회 관람", "야시장 방문", "레일바이크", "양궁카페", "수상레저"
-          , "보트 타기", "유람선 탑승", "동물원 방문"]}
+        options={[
+          "놀이공원", "수족관", "방탈출카페", "VR체험관", "보드게임카페",
+          "볼링장", "실내암벽장", "피크닉", "캠핑", "해수욕장", "서핑",
+          "카페투어", "시장투어", "자전거 타기", "등산", "루지", "짚라인",
+          "스노클링", "낚시", "온천", "호캉스", "스키", "스노보드", "아쿠아리움",
+          "클라이밍", "쇼핑", "영화관람", "드라이브", "맛집투어", "뮤지컬 관람",
+          "페스티벌 방문", "박물관 관람", "전시회 관람", "야시장 방문", "레일바이크",
+          "양궁카페", "수상레저", "보트 타기", "유람선 탑승", "동물원 방문"
+        ]}
       />
       <FooterGif />
     </View>
@@ -56,18 +49,6 @@ const styles = StyleSheet.create({
   },
   backArrow: {
     fontSize: 24,
-    color: '#FFF',
-  },
-  slotWrapper: {
-    alignItems: 'center',
-  },
-  categoryTitle: {
-    fontSize: 28,
-    color: '#FFF',
-    marginBottom: 20,
-  },
-  resultText: {
-    fontSize: 32,
     color: '#FFF',
   },
   footerContainer: {

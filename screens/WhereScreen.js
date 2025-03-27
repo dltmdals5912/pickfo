@@ -1,18 +1,7 @@
 // screens/WhereScreen.js
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
-const VerticalSlotMachinePicker = ({ category, options }) => {
-  // 여기서는 단순화하여 옵션들을 나열
-  return (
-    <View style={styles.slotWrapper}>
-      <Text style={styles.categoryTitle}>{category}</Text>
-      {options.map((option, index) => (
-        <Text key={index} style={styles.resultText}>{option}</Text>
-      ))}
-    </View>
-  );
-};
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import VerticalSlotMachinePicker from '../components/VerticalSlotMachinePicker';
 
 const FooterGif = () => {
   return (
@@ -25,15 +14,21 @@ const FooterGif = () => {
 export default function WhereScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backArrowContainer}>
+      <TouchableOpacity 
+        onPress={() => navigation.goBack()} 
+        style={styles.backArrowContainer}>
         <Text style={styles.backArrow}>←</Text>
       </TouchableOpacity>
       <VerticalSlotMachinePicker
         category="어디가지?"
-        options={["부산", "경주", "제주도", "일본", "서울", "강릉", "여수", "전주", "속초"
-          , "통영", "남해", "대만", "홍콩", "오사카", "도쿄", "삿포로", "싱가포르", "베트남"
-          , "태국", "필리핀", "하와이", "괌", "발리", "파리", "런던", "뉴욕", "LA", "밴쿠버"
-          , "스위스", "바르셀로나", "시드니", "마카오", "이탈리아", "포르투갈", "프라하", "암스테르담", "독일", "크로아티아", "보라카이", "몰디브"]}
+        options={["부산", "경주", "제주도", "일본", "서울"
+          , "강릉", "여수", "전주", "속초"
+          , "통영", "남해", "대만", "홍콩", "오사카", "도쿄"
+          , "삿포로", "싱가포르", "베트남", "태국", "필리핀"
+          , "하와이", "괌", "발리", "파리", "런던", "뉴욕"
+          , "LA", "밴쿠버", "스위스", "바르셀로나", "시드니"
+          , "마카오", "이탈리아", "포르투갈", "프라하", "암스테르담"
+          , "독일", "크로아티아", "보라카이", "몰디브"]}
       />
       <FooterGif />
     </View>
@@ -55,18 +50,6 @@ const styles = StyleSheet.create({
   },
   backArrow: {
     fontSize: 24,
-    color: '#FFF',
-  },
-  slotWrapper: {
-    alignItems: 'center',
-  },
-  categoryTitle: {
-    fontSize: 28,
-    color: '#FFF',
-    marginBottom: 20,
-  },
-  resultText: {
-    fontSize: 32,
     color: '#FFF',
   },
   footerContainer: {
