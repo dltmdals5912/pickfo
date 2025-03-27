@@ -1,14 +1,11 @@
 // screens/HomeScreen.js
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const FooterGif = () => {
   return (
     <View style={styles.footerContainer}>
-      <Image
-        source={require('../assets/Animation - 1742568590134.gif')}
-        style={styles.footerGif}
-      />
+      <Image source={require('../assets/Animation - 1742568590134.gif')} style={styles.footerGif} />
     </View>
   );
 };
@@ -18,19 +15,24 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <FooterGif />
       <Text style={styles.title}>Pick for me</Text>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('어디가지?')}>
-        <Text style={styles.buttonText}>어디가지?</Text>
+      
+      {/* 챗 입력 영역 - 터치 시 ChatScreen으로 이동 */}
+      <TouchableOpacity style={styles.chatInputWrapper} onPress={() => navigation.navigate('챗봇')}>
+        <Text style={styles.chatInputPlaceholder}>포미랑 같이 놀자..!</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('뭐먹지?')}>
-        <Text style={styles.buttonText}>뭐먹지?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('뭐하지?')}>
-        <Text style={styles.buttonText}>뭐하지?</Text>
-      </TouchableOpacity>
-      {/* 카테고리 버튼과는 별도로 작게 리뷰 링크 추가 */}
-      <TouchableOpacity style={styles.reviewLink} onPress={() => navigation.navigate('리뷰')}>
-        <Text style={styles.reviewLinkText}>리뷰</Text>
-      </TouchableOpacity>
+      
+      {/* 카테고리 버튼 영역 */}
+      <View style={styles.categoryContainer}>
+        <TouchableOpacity style={styles.categoryButton} onPress={() => navigation.navigate('어디가지?')}>
+          <Text style={styles.categoryButtonText}>어디가지?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.categoryButton} onPress={() => navigation.navigate('뭐먹지?')}>
+          <Text style={styles.categoryButtonText}>뭐먹지?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.categoryButton} onPress={() => navigation.navigate('뭐하지?')}>
+          <Text style={styles.categoryButtonText}>뭐하지?</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -48,27 +50,33 @@ const styles = StyleSheet.create({
     color: '#FFF',
     marginBottom: 20,
   },
-  button: {
+  chatInputWrapper: {
+    backgroundColor: '#222',
+    borderRadius: 8,
+    width: '100%',
+    padding: 15,
+    marginBottom: 20,
+  },
+  chatInputPlaceholder: {
+    color: '#888',
+    fontSize: 16,
+  },
+  categoryContainer: {
+    width: '100%',
+  },
+  categoryButton: {
     backgroundColor: '#444',
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
     marginVertical: 10,
-    width: '80%',
+    width: '60%', // 가로 너비를 60%로 줄임
+    alignSelf: 'center',
     alignItems: 'center',
   },
-  buttonText: {
+  categoryButtonText: {
     fontSize: 20,
     color: '#FFF',
-  },
-  reviewLink: {
-    marginTop: 10,
-    paddingVertical: 5,
-  },
-  reviewLinkText: {
-    fontSize: 14,
-    color: '#AAA',
-    textDecorationLine: 'underline',
   },
   footerContainer: {
     alignItems: 'center',
