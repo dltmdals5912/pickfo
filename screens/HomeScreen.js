@@ -33,6 +33,11 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.categoryButtonText}>뭐하지?</Text>
         </TouchableOpacity>
       </View>
+      
+      {/* 리뷰 버튼 추가 */}
+      <TouchableOpacity style={styles.reviewButton} onPress={() => navigation.navigate('리뷰')}>
+        <Text style={styles.reviewButtonText}>리뷰</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -70,12 +75,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 8,
     marginVertical: 10,
-    width: '60%', // 가로 너비를 60%로 줄임
+    width: '60%',
     alignSelf: 'center',
     alignItems: 'center',
   },
   categoryButtonText: {
     fontSize: 20,
+    color: '#FFF',
+  },
+  reviewButton: {
+    backgroundColor: '#555',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    marginTop: 20,
+  },
+  reviewButtonText: {
+    fontSize: 18,
     color: '#FFF',
   },
   footerContainer: {

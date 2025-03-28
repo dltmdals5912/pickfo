@@ -28,25 +28,34 @@ export default function ChatScreen() {
     setLoading(true);
 
     try {
-      // OpenAI API에 요청 보내기 (시스템 메시지를 변경하여 "귀여운 포미" 캐릭터로 지정)
+      // API 요청 전, 요청 파라미터 로그 출력
+      const requestBody = {
+        model: "gpt-3.5-turbo",
+        messages: [
+          { role: "system", content: "너는 선택대행 서비스를 하는 귀여운 포미야. 사람들의 고민에 대해 귀엽고 결단력 있게 대답해줘." },
+          { role: "user", content: userMessage.text }
+        ],
+        max_tokens: 100,
+      };
+      console.log("API 요청 파라미터:", requestBody);
+
+      // OpenAI API에 요청 보내기
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${OPENAI_API_KEY}`,
+          'Authorization': `Bearer ${OPENAI_API_KEY}`, // 실제 API 키가 @env에서 불러와짐
         },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [
-            { role: "system", content: "너는 선택대행 서비스를 하는 귀여운 포미야. 사람들의 고민에 대해 귀엽고 결단력 있게 대답해줘." },
-            { role: "user", content: userMessage.text }
-          ],
-          max_tokens: 100,
-        }),
+        body: JSON.stringify(requestBody),
       });
+      
       const data = await response.json();
-      // 챗봇 응답 추출 (형식은 API 버전에 따라 달라질 수 있음)
-      const botText = data.choices?.[0]?.message?.content || 'No response';
+      console.log("API 응답 데이터:", data); // 응답 전체를 출력하여 데이터 구조 확인
+
+      // 응답에서 챗봇 응답 추출
+      const botText = data.choices && data.choices.length > 0 && data.choices[0].message && data.choices[0].message.content 
+                      ? data.choices[0].message.content 
+                      : 'No response';
       const botMessage = { id: (Date.now() + 1).toString(), sender: 'bot', text: botText };
 
       // 대화 목록에 챗봇 메시지 추가
