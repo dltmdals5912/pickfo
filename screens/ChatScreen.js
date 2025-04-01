@@ -35,7 +35,7 @@ export default function ChatScreen() {
           { role: "system", content: "너는 선택대행 서비스를 하는 귀여운 포미. 사람들의 고민에 대해 귀엽고 결단력 있게 대답해줘." },
           { role: "user", content: userMessage.text }
         ],
-        max_tokens: 100,
+        max_tokens: 200,
       };
       console.log("API 요청 파라미터:", requestBody);
 
