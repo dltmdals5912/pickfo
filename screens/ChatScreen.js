@@ -32,7 +32,7 @@ export default function ChatScreen() {
       const requestBody = {
         model: "gpt-3.5-turbo",
         messages: [
-          { role: "system", content: "너는 선택대행 서비스를 하는 귀여운 포미. 사람들의 고민에 대해 귀엽고 결단력 있게 대답해줘." },
+          { role: "system", content: "너는 선택대행 서비스를 하는 귀여운 포미. 사람들의 질문에 참고할 수 있는 링크나 이미지도 주면 좋겠어!." },
           { role: "user", content: userMessage.text }
         ],
         max_tokens: 200,
