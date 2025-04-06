@@ -16,7 +16,8 @@ export default function FoodScreen({ navigation }) {
     <View style={styles.container}>
       <TouchableOpacity 
         onPress={() => navigation.goBack()} 
-        style={styles.backArrowContainer}>
+        style={styles.backArrowContainer}
+      >
         <Text style={styles.backArrow}>←</Text>
       </TouchableOpacity>
       <VerticalSlotMachinePicker
@@ -35,7 +36,7 @@ export default function FoodScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#FDE7C8',
     paddingHorizontal: 20,
     paddingTop: 40,
     justifyContent: 'space-between',
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   },
   backArrow: {
     fontSize: 24,
-    color: '#FFF',
+    color: '#FFBEA3',
   },
   footerContainer: {
     alignItems: 'center',

@@ -1,4 +1,4 @@
-
+// screens/ActivityScreen.js
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import VerticalSlotMachinePicker from '../components/VerticalSlotMachinePicker';
@@ -14,7 +14,10 @@ const FooterGif = () => {
 export default function ActivityScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backArrowContainer}>
+      <TouchableOpacity 
+        onPress={() => navigation.goBack()} 
+        style={styles.backArrowContainer}
+      >
         <Text style={styles.backArrow}>←</Text>
       </TouchableOpacity>
       <VerticalSlotMachinePicker
@@ -37,7 +40,7 @@ export default function ActivityScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#FDE7C8', // 부드러운 파스텔톤 배경
     paddingHorizontal: 20,
     paddingTop: 40,
     justifyContent: 'space-between',
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
   },
   backArrow: {
     fontSize: 24,
-    color: '#FFF',
+    color: '#FFBEA3',  // 일관된 색상
   },
   footerContainer: {
     alignItems: 'center',

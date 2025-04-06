@@ -2,27 +2,19 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-const FooterGif = () => {
-  return (
-    <View style={styles.footerContainer}>
-      <Image 
-        source={require('../assets/Animation - 1742568590134.gif')}
-        style={styles.footerGif}
-      />
-    </View>
-  );
-};
-
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <FooterGif />
-      <Text style={styles.title}>Pick For Me</Text>
-      
-      {/* 챗 입력 영역 - 터치 시 챗봇 화면으로 이동 */}
-      <TouchableOpacity style={styles.chatInputWrapper} onPress={() => navigation.navigate('챗봇')}>
-        <Text style={styles.chatInputPlaceholder}>포미랑 같이 놀자..!</Text>
+      {/* GIF를 누르면 챗봇 화면으로 이동 */}
+      <TouchableOpacity style={styles.gifWrapper} onPress={() => navigation.navigate('챗봇')}>
+        <Image 
+          source={require('../assets/forme.gif')}
+          style={styles.footerGif}
+        />
+        <Text style={styles.chatLabel}>포미의 볼을 눌러봐!</Text>
       </TouchableOpacity>
+      
+      <Text style={styles.title}>Pick For Me</Text>
       
       {/* 카테고리 버튼 영역 */}
       <View style={styles.categoryContainer}>
@@ -54,35 +46,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
+  gifWrapper: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  footerGif: {
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
+  },
+  chatLabel: {
+    marginTop: 4,         // GIF와 텍스트 간 간격 줄임
+    fontSize: 14,
+    color: '#FF8C66',     // 추천 색상: 조금 더 진한 피치 톤
+    fontWeight: '300',
+  },
   title: {
     fontSize: 36,
-    color: '#333', // 어두운 회색 (디자인 시안에 맞춤)
+    color: '#FFBEA3',     // 제목 텍스트 색상
     fontWeight: 'bold',
     marginBottom: 30,
-  },
-  chatInputWrapper: {
-    backgroundColor: '#FFF',
-    borderRadius: 8,
-    width: '100%',
-    padding: 15,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 2,
-  },
-  chatInputPlaceholder: {
-    color: '#888',
-    fontSize: 16,
   },
   categoryContainer: {
     width: '100%',
     alignItems: 'center',
   },
   categoryButton: {
-    backgroundColor: '#FFA726', // 밝은 오렌지
+    backgroundColor: '#FFBEA3', // 카테고리 버튼 배경 색상
     paddingVertical: 15,
-    width: '70%', // 버튼 가로 길이 (원하는 크기로 조절 가능)
+    width: '70%',
     borderRadius: 8,
     marginVertical: 8,
     alignItems: 'center',
@@ -93,7 +85,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   reviewButton: {
-    backgroundColor: '#FF7043', // 약간 더 진한 오렌지/레드 톤
+    backgroundColor: '#FF7043', // 리뷰 버튼 색상
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
@@ -102,14 +94,5 @@ const styles = StyleSheet.create({
   reviewButtonText: {
     fontSize: 18,
     color: '#FFF',
-  },
-  footerContainer: {
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  footerGif: {
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
   },
 });
