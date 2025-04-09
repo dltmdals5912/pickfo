@@ -1,40 +1,76 @@
 // screens/HomeScreen.js
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Animated,
+} from 'react-native';
 
 export default function HomeScreen({ navigation }) {
+  // [1] 타이틀 이미지에 적용할 애니메이션 값 설정 (opacity: 0 → 1)
+  const titleOpacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    // [2] 컴포넌트 마운트 시 애니메이션 실행
+    Animated.timing(titleOpacity, {
+      toValue: 1,
+      duration: 800,
+      useNativeDriver: true,
+    }).start();
+  }, []);
+
   return (
     <View style={styles.container}>
-      {/* GIF를 누르면 챗봇 화면으로 이동 */}
-      <TouchableOpacity style={styles.gifWrapper} onPress={() => navigation.navigate('챗봇')}>
-        <Image 
+      {/* ------------------ 1. 포미 챗봇 이동 영역 ------------------ */}
+      <TouchableOpacity
+        style={styles.gifWrapper}
+        onPress={() => navigation.navigate('챗봇')}
+      >
+        <Image
           source={require('../assets/forme.gif')}
           style={styles.footerGif}
         />
         <Text style={styles.chatLabel}>포미의 볼을 눌러봐!</Text>
       </TouchableOpacity>
 
-      {/* 텍스트 대신 이미지로 대체한 제목 */}
-      <Image
-        source={require('../assets/pickforme.title.png')}
-        style={styles.titleImage}
+      {/* ------------------ 2. 타이틀 GIF (애니메이션 등장) ------------------ */}
+      <Animated.Image
+        source={require('../assets/pickforme.title.gif')}
+        style={[styles.titleImage, { opacity: titleOpacity }]}
       />
 
-      {/* 카테고리 버튼 영역 */}
+      {/* ------------------ 3. 카테고리 버튼 (장소/음식/활동) ------------------ */}
       <View style={styles.categoryContainer}>
-        <TouchableOpacity style={styles.categoryButton} onPress={() => navigation.navigate('어디가지?')}>
+        <TouchableOpacity
+          style={styles.categoryButton}
+          onPress={() => navigation.navigate('어디가지?')}
+        >
           <Text style={styles.categoryButtonText}>어디가지?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.categoryButton} onPress={() => navigation.navigate('뭐먹지?')}>
+
+        <TouchableOpacity
+          style={styles.categoryButton}
+          onPress={() => navigation.navigate('뭐먹지?')}
+        >
           <Text style={styles.categoryButtonText}>뭐먹지?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.categoryButton} onPress={() => navigation.navigate('뭐하지?')}>
+
+        <TouchableOpacity
+          style={styles.categoryButton}
+          onPress={() => navigation.navigate('뭐하지?')}
+        >
           <Text style={styles.categoryButtonText}>뭐하지?</Text>
         </TouchableOpacity>
       </View>
-      
-      {/* 리뷰 버튼 */}
-      <TouchableOpacity style={styles.reviewButton} onPress={() => navigation.navigate('리뷰')}>
+
+      {/* ------------------ 4. 리뷰 버튼 ------------------ */}
+      <TouchableOpacity
+        style={styles.reviewButton}
+        onPress={() => navigation.navigate('리뷰')}
+      >
         <Text style={styles.reviewButtonText}>리뷰</Text>
       </TouchableOpacity>
     </View>
@@ -44,7 +80,7 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FDE7C8', // 부드러운 파스텔톤 배경
+    backgroundColor: '#FDE7C8', // 따뜻한 배경톤
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
@@ -56,20 +92,22 @@ const styles = StyleSheet.create({
   },
   footerGif: {
     width: 250,
-    height: 250,
+    height: 200,
     resizeMode: 'contain',
   },
   chatLabel: {
-    marginTop: -40,         // GIF와 텍스트 간 간격 줄임
+    marginTop: -40,
+    marginBottom: -10, // ⬅️ 타이틀과 간격 줄이기
     fontSize: 14,
     color: '#FF8C66',
-    fontWeight: '300',
+    fontWeight: '400',
   },
   titleImage: {
-    width: 250,
-    height: 200,
+    width: 450,
+    height: 180,
     resizeMode: 'contain',
-    marginBottom: 30,
+    marginTop: -40,     // ⬅️ 위 요소와 더 밀착
+    marginBottom: -20,
   },
   categoryContainer: {
     width: '100%',
