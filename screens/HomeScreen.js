@@ -13,9 +13,13 @@ export default function HomeScreen({ navigation }) {
         />
         <Text style={styles.chatLabel}>포미의 볼을 눌러봐!</Text>
       </TouchableOpacity>
-      
-      <Text style={styles.title}>Pick For Me</Text>
-      
+
+      {/* 텍스트 대신 이미지로 대체한 제목 */}
+      <Image
+        source={require('../assets/pickforme.title.png')}
+        style={styles.titleImage}
+      />
+
       {/* 카테고리 버튼 영역 */}
       <View style={styles.categoryContainer}>
         <TouchableOpacity style={styles.categoryButton} onPress={() => navigation.navigate('어디가지?')}>
@@ -51,20 +55,20 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   footerGif: {
-    width: 150,
-    height: 150,
+    width: 250,
+    height: 250,
     resizeMode: 'contain',
   },
   chatLabel: {
-    marginTop: 4,         // GIF와 텍스트 간 간격 줄임
+    marginTop: -40,         // GIF와 텍스트 간 간격 줄임
     fontSize: 14,
-    color: '#FF8C66',     // 추천 색상: 조금 더 진한 피치 톤
+    color: '#FF8C66',
     fontWeight: '300',
   },
-  title: {
-    fontSize: 36,
-    color: '#FFBEA3',     // 제목 텍스트 색상
-    fontWeight: 'bold',
+  titleImage: {
+    width: 250,
+    height: 200,
+    resizeMode: 'contain',
     marginBottom: 30,
   },
   categoryContainer: {
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoryButton: {
-    backgroundColor: '#FFBEA3', // 카테고리 버튼 배경 색상
+    backgroundColor: '#FFBEA3',
     paddingVertical: 15,
     width: '70%',
     borderRadius: 8,
@@ -85,7 +89,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   reviewButton: {
-    backgroundColor: '#FF7043', // 리뷰 버튼 색상
+    backgroundColor: '#FF7043',
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
